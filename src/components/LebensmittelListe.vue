@@ -17,9 +17,6 @@ export default {
         { name: "Apfel", kalorien: 52 },
         { name: "Banane", kalorien: 89 },
         { name: "Kartoffel", kalorien: 77 }
-        { name: "McMenu", kalorien: 892 }
-        { name: "Hot Dog", kalorien: 340 }
-        { name: "Schokoriegel", kalorien: 103 }
       ]
     };
   }

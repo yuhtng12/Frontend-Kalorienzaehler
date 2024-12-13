@@ -23,10 +23,11 @@ export default {
       .get("https://webtech-projekt-kalorienzaehler.onrender.com/api/lebensmittel")
       .then((response) => {
         this.lebensmittelListe = response.data;
-      })
-      .catch((error) => {
-        console.error("Fehler beim Abrufen der Lebensmittel:", error.message);
       });
+  .catch((error) => {
+      console.error("Fehler beim Abrufen der Lebensmittel:", error.message);
+      alert("Daten konnten nicht geladen werden. Bitte versuche es erneut.");
+    });
   },
 };
 </script>

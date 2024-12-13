@@ -10,15 +10,23 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
-      lebensmittelListe: [
-        { name: "Apfel", kalorien: 52 },
-        { name: "Banane", kalorien: 89 },
-        { name: "Kartoffel", kalorien: 77 } // npm run dev am Ende eingeben in der console
-      ]
+      lebensmittelListe: [],
     };
-  }
+  },
+  mounted() {
+    axios
+      .get("https://webtech-backend.onrender.com/api/lebensmittel")
+      .then((response) => {
+        this.lebensmittelListe = response.data;
+      })
+      .catch((error) => {
+        console.error("Fehler beim Abrufen der Lebensmittel:", error);
+      });
+  },
 };
 </script>

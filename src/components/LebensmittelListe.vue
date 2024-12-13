@@ -20,7 +20,7 @@ export default {
   },
   mounted() {
     axios
-      .get("https://webtech-backend.onrender.com/api/lebensmittel")
+      .get("https://webtech-projekt-kalorienzaehler.onrender.com/api/lebensmittel")
       .then((response) => {
         this.lebensmittelListe = response.data;
       })

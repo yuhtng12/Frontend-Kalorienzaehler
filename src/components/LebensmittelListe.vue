@@ -25,7 +25,7 @@ export default {
         this.lebensmittelListe = response.data;
       })
       .catch((error) => {
-        console.error("Fehler beim Abrufen der Lebensmittel:", error);
+        console.error("Fehler beim Abrufen der Lebensmittel:", error.message);
       });
   },
 };

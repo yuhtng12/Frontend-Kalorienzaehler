@@ -1,45 +1,86 @@
-<template>
-  <div>
-    <div class="lebensmittelliste">
-      <h2>Lebensmittelliste</h2>
-      <ul>
-        <li v-for="lebensmittel in lebensmittelListe" :key="lebensmittel.name">
-          {{ lebensmittel.name }} - {{ lebensmittel.kalorien }} kcal
-        </li>
-      </ul>
-    </div>
-    <div class="gesamtkalorien">
-      <h2>Gesamtkalorien</h2>
-      <p>{{ totalKalorien }} kcal</p>
-    </div>
-  </div>
-</template>
-
-<script>
-export default {
-  data() {
-    return {
-      lebensmittelListe: [
-        { name: "Apfel", kalorien: 52 },
-        { name: "Banane", kalorien: 89 },
-        { name: "Kartoffel", kalorien: 77 },
-      ],
-    };
-  },
-  computed: {
-    totalKalorien() {
-      return this.lebensmittelListe.reduce((sum, item) => sum + item.kalorien, 0);
-    },
-  },
-};
+<script setup lang="ts">
+import { RouterLink, RouterView } from 'vue-router';
+import TotalCaloriesView from './views/TotalCaloriesView.vue';
+import FoodListView from './views/FoodListView.vue';
 </script>
 
+<template>
+  <header>
+    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
+
+    <div class="wrapper">
+      <TotalCaloriesView />
+
+      <nav>
+        <RouterLink to="/">Home</RouterLink>
+        <RouterLink to="/total-calories">Kalorienübersicht</RouterLink>
+        <RouterLink to="/food-list">Lebensmittelliste</RouterLink>
+      </nav>
+    </div>
+  </header>
+
+  <RouterView />
+</template>
+
 <style scoped>
-.lebensmittelliste, .gesamtkalorien {
-  margin-bottom: 20px;
+header {
+  line-height: 1.5;
+  max-height: 100vh;
 }
-.lebensmittelliste {
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 10px;
+
+.logo {
+  display: block;
+  margin: 0 auto 2rem;
+}
+
+nav {
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+nav a.router-link-exact-active {
+  color: var(--color-text);
+}
+
+nav a.router-link-exact-active:hover {
+  background-color: transparent;
+}
+
+nav a {
+  display: inline-block;
+  padding: 0 1rem;
+  border-left: 1px solid var(--color-border);
+}
+
+nav a:first-of-type {
+  border: 0;
+}
+
+@media (min-width: 1024px) {
+  header {
+    display: flex;
+    place-items: center;
+    padding-right: calc(var(--section-gap) / 2);
+  }
+
+  .logo {
+    margin: 0 2rem 0 0;
+  }
+
+  header .wrapper {
+    display: flex;
+    place-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  nav {
+    text-align: left;
+    margin-left: -1rem;
+    font-size: 1rem;
+    padding: 1rem 0;
+    margin-top: 1rem;
+  }
 }
 </style>

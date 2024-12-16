@@ -3,8 +3,9 @@ import FoodListView from '@/views/FoodListView.vue';
 import TotalCaloriesView from '@/views/TotalCaloriesView.vue';
 
 const routes = [
+  { path: '/', name: 'Home', component: () => import('@/views/HomeView.vue') },
+  { path: '/total-calories', name: 'TotalCalories', component: TotalCaloriesView },
   { path: '/food-list', name: 'FoodList', component: FoodListView },
-  { path: '/calorie-overview', name: 'CalorieOverview', component: TotalCaloriesView },
 ];
 
 const router = createRouter({

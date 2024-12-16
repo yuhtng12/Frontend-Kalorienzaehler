@@ -1,40 +1,36 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 
+const lebensmittelListe = ref([]);
 const apiEndpoint = import.meta.env.VITE_APP_BACKEND_BASE_URL + '/api/lebensmittel';
-const lebensmittelListe = ref<{ name: string; kalorien: number }[]>([]);
 
 const totalCalories = computed(() =>
   lebensmittelListe.value.reduce((sum, item) => sum + item.kalorien, 0)
 );
 
-async function loadFoods() {
-  try {
-    const response = await axios.get(apiEndpoint);
-    lebensmittelListe.value = response.data;
-  } catch (err) {
-    console.error('Fehler beim Laden der Daten:', err);
-    alert('Die Kalorien konnten nicht geladen werden.');
-  }
-}
-
-loadFoods();
+onMounted(() => {
+  axios
+    .get(apiEndpoint)
+    .then((res) => {
+      lebensmittelListe.value = res.data;
+    })
+    .catch((err) => {
+      console.error('Fehler beim Abrufen der Daten:', err);
+      alert('Kalorien konnten nicht geladen werden.');
+    });
+});
 </script>
 
 <template>
-  <main>
-    <h1>Kalorienanzeige</h1>
-    <p v-if="!lebensmittelListe.length">Noch keine Lebensmittel hinzugefügt.</p>
+  <div>
+    <h1>Kalorienübersicht</h1>
+    <p v-if="!lebensmittelListe.length">Noch keine Daten vorhanden.</p>
     <p v-else>Gesamtkalorien: {{ totalCalories }} kcal</p>
-  </main>
+  </div>
 </template>
 
 <style scoped>
-main {
-  margin: 16px;
-}
-
 p {
   font-size: 1.2em;
 }

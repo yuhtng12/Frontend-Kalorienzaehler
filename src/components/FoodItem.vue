@@ -40,7 +40,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+button:hover { //test
   background: red;
 }
 </style>

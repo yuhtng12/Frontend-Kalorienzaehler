@@ -5,14 +5,17 @@
   </div>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   props: {
-    lebensmittel: Object, // Erwartet ein Lebensmittel-Objekt
+    lebensmittel: {
+      type: Object,
+      required: true, // Validierung hinzugefügt
+    },
   },
   methods: {
     deleteItem() {
-      this.$emit('delete', this.lebensmittel.id); // Emit Event mit der ID
+      this.$emit('delete', this.lebensmittel.id);
     },
   },
 };
@@ -21,7 +24,7 @@ export default {
 <style scoped>
 .food-item {
   margin: 8px;
-  border: 2px solid var(--color-border);
+  border: 2px solid var(--color-border, #ccc); /* Fallback hinzugefügt */
   padding: 8px;
   display: flex;
   align-items: center;
@@ -40,7 +43,7 @@ button {
   cursor: pointer;
 }
 
-button:hover { //test
+button:hover {
   background: red;
 }
 </style>

@@ -6,6 +6,17 @@ const routes = [
   { path: '/', name: 'Home', component: () => import('@/views/HomeView.vue') },
   { path: '/total-calories', name: 'TotalCalories', component: TotalCaloriesView },
   { path: '/food-list', name: 'FoodList', component: FoodListView },
+  {
+    path: '/add-product',
+    name: 'AddProduct',
+    component: () => import('@/components/AddProduct.vue'),
+  },
+  {
+    path: '/manage-products',
+    name: 'ManageProducts',
+    component: () => import('@/components/ManageProducts.vue'),
+  },
+
 ];
 
 const router = createRouter({

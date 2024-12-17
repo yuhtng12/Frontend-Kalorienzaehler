@@ -1,29 +1,22 @@
-<script lang="ts">
-import { defineComponent, type PropType } from 'vue';
-
-export default defineComponent({
-  name: 'FoodItem',
-  props: {
-    food: {
-      type: Object as PropType<{ name: string; kalorien: number }>,
-      required: true,
-    },
-  },
-  emits: ['delete'], // Event für das Löschen
-});
-</script>
-
 <template>
   <div class="food-item">
-    <p>{{ food.name }} - {{ food.kalorien }} kcal</p>
-    <button
-      :aria-description="'Lebensmittel ' + food.name + ' löschen'"
-      v-on:click="$emit('delete')"
-    >
-      Löschen
-    </button>
+    <p>{{ lebensmittel.name }} ({{ lebensmittel.kalorien }} kcal)</p>
+    <button @click="deleteItem">Löschen</button>
   </div>
 </template>
+
+<script>
+export default {
+  props: {
+    lebensmittel: Object, // Erwartet ein Lebensmittel-Objekt
+  },
+  methods: {
+    deleteItem() {
+      this.$emit('delete', this.lebensmittel.id); // Emit Event mit der ID
+    },
+  },
+};
+</script>
 
 <style scoped>
 .food-item {
@@ -32,21 +25,22 @@ export default defineComponent({
   padding: 8px;
   display: flex;
   align-items: center;
+}
 
-  p {
-    flex-grow: 1;
-  }
+p {
+  flex-grow: 1;
+}
 
-  &,
-  button {
-    border-radius: 4px;
-  }
+button {
+  background: darkred;
+  color: white;
+  border-radius: 4px;
+  padding: 4px 8px;
+  border: none;
+  cursor: pointer;
+}
 
-  button {
-    background: darkred;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
+button:hover {
+  background: red;
 }
 </style>

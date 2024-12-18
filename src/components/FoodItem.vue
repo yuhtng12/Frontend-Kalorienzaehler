@@ -1,13 +1,16 @@
 <template>
   <div class="food-item">
-    <p>{{ lebensmittel.name }} ({{ lebensmittel.kalorien }} kcal)</p>
+    <p v-if="lebensmittel">{{ lebensmittel.name }} ({{ lebensmittel.kalorien }} kcal)</p>
   </div>
 </template>
 
 <script lang="ts">
 export default {
   props: {
-    lebensmittel: Object, // Erwartet ein Lebensmittel-Objekt
+    lebensmittel: {
+      type: Object, // Erwartet ein Lebensmittel-Objekt
+      required: true,
+    },
   },
 };
 </script>

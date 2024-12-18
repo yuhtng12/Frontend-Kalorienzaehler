@@ -22,7 +22,7 @@ export default defineComponent({
     <h1>Lebensmittelliste</h1>
     <ul>
       <li v-for="food in foods" :key="food.name">
-        <FoodItem :food="food" />
+        <FoodItem :lebensmittel="food" />
       </li>
     </ul>
   </div>

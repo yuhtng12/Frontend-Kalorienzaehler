@@ -17,7 +17,7 @@ import axios from 'axios';
 export default defineComponent({
   name: 'ManageProducts',
   setup() {
-    const products = ref([]);
+    const products = ref<{ id: number; name: string; kalorien: number }[]>([]);
     const apiEndpoint = import.meta.env.VITE_APP_BACKEND_BASE_URL + '/api/lebensmittel';
 
     // Produkte laden
@@ -25,7 +25,7 @@ export default defineComponent({
       axios
         .get(apiEndpoint)
         .then((response) => {
-          products.value = response.data;
+          products.value = response.data as { id: number; name: string; kalorien: number }[];
         })
         .catch((error) => {
           console.error('Fehler beim Laden der Produkte:', error);

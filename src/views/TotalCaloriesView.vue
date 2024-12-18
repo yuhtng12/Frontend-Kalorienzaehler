@@ -2,7 +2,7 @@
 import { ref, computed, onMounted } from 'vue';
 import axios from 'axios';
 
-const lebensmittelListe = ref([]);
+const lebensmittelListe = ref<{ kalorien: number }[]>([]);
 const apiEndpoint = import.meta.env.VITE_APP_BACKEND_BASE_URL + '/api/lebensmittel';
 
 const totalCalories = computed(() =>
